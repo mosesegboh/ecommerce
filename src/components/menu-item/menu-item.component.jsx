@@ -1,14 +1,21 @@
 import React from 'react';
+
+//with router takes a functional  component and returns something with more router features
+import{ withRouter } from 'react-router-dom';
+
 import './menu-item.styles.scss';
 
 //we are not returning any state  so lets just render
 //we want to dynamically enter the title as a props to be used later so we destructure it for now by removing props. 
 //which means we are striping off that props value off the title so that we can use the title where ever we want instead of props.title which will just be perculiar to this compnent
 //jsx by defaulthas some styles property that can apply to components
-const MenuItem = ({title,imageUrl,size}) => (
+//by wrapping withrouter, we have access to history passed into the props below
+//match belownis explained in video 68 aswell
+const MenuItem = ({title,imageUrl,size, history, linkUrl, match}) => (
     <div 
     // you can also add extre classes dynamically like this below
-    className={`${size} menu-item`}>
+    className={`${size} menu-item`}
+    onClick ={()=>history.push(`${match.url}${linkUrl}`)}>
         <div className='background-Image'   style={{
         // we passing the bacakgorund image as a style to this jxs css in the format below
         //this also enables us to dynamically make changes to our css values
@@ -22,4 +29,4 @@ const MenuItem = ({title,imageUrl,size}) => (
         </div>
     </div>
 );
-export default MenuItem;
+export default withRouter(MenuItem);

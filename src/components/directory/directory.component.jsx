@@ -14,7 +14,7 @@ class Directory extends React.Component {
                   title: 'hats',
                   imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
                   id: 1,
-                  linkUrl: 'shop/hats'
+                  linkUrl: 'hats'
                 },
                 {
                   title: 'jackets',
@@ -51,8 +51,10 @@ class Directory extends React.Component {
             <div className='directory-menu'>
                 {/* we map through our sections */}
                 {/* the synta below is thesame thing as mapping,its just the short form instaed of typing section everytime */}
-                {this.state.sections.map(({title, imageUrl, id, size})=> (
-                <MenuItem key={id} title={title} imageUrl={imageUrl} size={size} />
+                {/* check video 68,instead of doing mapping with names of linke over and over again,we used a short cut below */}
+                {/* we spread out the other section props using the shorthand below othersectionpros but the id remains thesame */}
+                {this.state.sections.map(({id, ...otherSectionProps})=> (
+                <MenuItem key={id} {...otherSectionProps} />
             ))}
             </div>
         );
