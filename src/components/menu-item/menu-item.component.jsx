@@ -29,4 +29,5 @@ const MenuItem = ({title,imageUrl,size, history, linkUrl, match}) => (
         </div>
     </div>
 );
+//the with router below is called HOC higher order compinent because it adds more features to the component thats passed in
 export default withRouter(MenuItem);
