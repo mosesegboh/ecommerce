@@ -30,7 +30,7 @@ class SignUp extends React.Component {
             try {
                 const{user}=await auth.createUserWithEmailAndPassword(email, password);
             
-                createUserProfileDocument(user, {displayName});
+                await createUserProfileDocument(user, {displayName});
                 //this below will clear out our form
                 this.setState({
                     displayName: '',
@@ -46,7 +46,6 @@ class SignUp extends React.Component {
 
     handleChange = event => {
         const {name, value} = event.target;
-
         this.setState({[name]: value});
     };
 

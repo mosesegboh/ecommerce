@@ -1,7 +1,7 @@
 import React from 'react';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
-import {signInWithGoogle} from '../../firebase/firebase.utils';
+import {auth, signInWithGoogle} from '../../firebase/firebase.utils';
 import './sign-in.styles.scss';
 
 //1. because we have to store what the user is typing, we need to use a class in component
@@ -16,10 +16,17 @@ class SignIn extends React.Component{
         }   
     }
     //4.the function will handle our subission button
-    handleSubmit = event => {
+    handleSubmit = async event => {
         //5.this function will prevent the default submit action from firing,we want full control of what is going to happen as regards the form
         event.preventDefault();
-        this.setState({email:'',password:''})
+        const {email, password} = this.setState;
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+            this.setState({email:'',password:''})
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
 
     handleChange = event => {
