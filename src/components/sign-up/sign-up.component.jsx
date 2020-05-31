@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FormInput from '/form-input/form-input.component';
+import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import {auth, createUserProfileDocument} from '../../firebase/firebase.utils';
@@ -8,7 +8,7 @@ import {auth, createUserProfileDocument} from '../../firebase/firebase.utils';
 import './sign-up.styles.scss';
 import { Component } from 'react';
 
-class SignUp extends React Component {
+class SignUp extends React.Component {
     constructor(){
         super();
         this.state={
@@ -23,12 +23,12 @@ class SignUp extends React Component {
         event.preventDefault();
         const {displayName, email, password, confirmPassword} = this.state;
 
-        if(password != confirmPassword){
+        if(password !== confirmPassword){
             alert("password dont match");
             return;
-
+        }
             try {
-                const{user}=await auth.createUserWithEmailAndPassword(email, password)
+                const{user}=await auth.createUserWithEmailAndPassword(email, password);
             
                 createUserProfileDocument(user, {displayName});
                 //this below will clear out our form
@@ -42,7 +42,7 @@ class SignUp extends React Component {
                console.error(error); 
             }
         };
-    }
+    
 
     handleChange = event => {
         const {name, value} = event.target;
